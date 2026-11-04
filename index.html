@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,800;1,6..96,500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="public">
+
+  <header class="nav">
+    <a href="#top" class="nav-logo" id="navName">Portfolio</a>
+    <nav>
+      <a href="#work">Work</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+      <!-- Takes you to the dashboard where you edit everything -->
+      <a href="admin.html" class="btn btn-small" id="editLink" hidden>Edit</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO: filled in by script.js from your saved data -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-title" id="heroTitle"></p>
+        <h1 id="heroName"></h1>
+        <p class="hero-intro" id="heroIntro"></p>
+        <div class="hero-actions">
+          <a href="#work" class="btn">View my work</a>
+          <a href="#contact" class="btn btn-ghost">Contact me</a>
+        </div>
+      </div>
+      <figure class="hero-visual" id="heroVisual"></figure>
+    </section>
+
+    <section id="work" class="section">
+      <h2 class="section-title">Selected work</h2>
+      <div class="grid" id="projectGrid"></div>
+    </section>
+
+    <section id="about" class="section about">
+      <h2 class="section-title">About</h2>
+      <div class="about-body">
+        <p class="about-lead" id="aboutLead"></p>
+        <p id="aboutText"></p>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills" id="skillsWrap"></div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <h2 class="section-title">Let’s make something</h2>
+      <div class="contact-links" id="contactLinks"></div>
+    </section>
+  </main>
+
+  <footer class="footer"><span id="footName"></span></footer>
+
+  <!-- Project detail modal -->
+  <dialog id="modal" class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-body">
+      <p class="tag" id="modalCat"></p>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc" class="modal-desc"></p>
+      <p id="modalDetails"></p>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>

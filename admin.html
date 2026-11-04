@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,800;1,6..96,500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="admin" class="admin">
+
+  <header class="admin-bar">
+    <strong>Dashboard</strong>
+    <span id="status" class="status">All changes saved</span>
+    <div class="admin-bar-actions">
+      <a href="index.html" class="btn btn-ghost btn-small">View site</a>
+      <button class="btn btn-small" id="saveBtn">Save changes</button>
+    </div>
+  </header>
+
+  <div class="admin-wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="profile">Profile</button>
+      <button class="tab" data-tab="projects">Projects</button>
+      <button class="tab" data-tab="skills">Skills</button>
+      <button class="tab" data-tab="contact">Contact</button>
+      <button class="tab" data-tab="backup">Publish</button>
+    </div>
+
+    <!-- PROFILE -->
+    <section class="panel active" id="tab-profile">
+      <h2>Profile</h2>
+      <label>Your name <input id="pName"></label>
+      <label>Job title <input id="pTitle"></label>
+      <label>Short introduction (shown in the hero) <textarea id="pIntro" rows="3"></textarea></label>
+      <label>About: one-line headline <input id="aLead"></label>
+      <label>About: your creative journey <textarea id="aText" rows="5"></textarea></label>
+      <div class="field">
+        <span>Profile or featured image</span>
+        <div class="upload">
+          <div class="preview" id="pPreview"></div>
+          <div>
+            <input type="file" id="pFile" accept="image/*">
+            <button class="btn btn-ghost btn-small" id="pClear" type="button">Remove image</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="panel" id="tab-projects">
+      <h2>Projects</h2>
+      <div class="split">
+        <div>
+          <button class="btn btn-small" id="newProject">+ Add new project</button>
+          <ul class="list" id="projectList"></ul>
+        </div>
+        <form class="box" id="projectForm" onsubmit="return false">
+          <h3 id="formHeading">New project</h3>
+          <label>Title <input id="jTitle" required></label>
+          <label>Category <input id="jCat" placeholder="e.g. Poster Design, Branding, Web"></label>
+          <label>Short description (shown on the card) <textarea id="jDesc" rows="2"></textarea></label>
+          <label>More details (shown when the card is opened) <textarea id="jDetails" rows="4"></textarea></label>
+          <div class="field">
+            <span>Project image</span>
+            <div class="upload">
+              <div class="preview" id="jPreview"></div>
+              <input type="file" id="jFile" accept="image/*">
+            </div>
+          </div>
+          <button class="btn" id="saveProject" type="button">Save project</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="panel" id="tab-skills">
+      <h2>Skills</h2>
+      <p class="hint">Skills with the same group name are shown together. Level is 0 to 100.</p>
+      <div id="skillRows"></div>
+      <button class="btn btn-small" id="addSkill">+ Add skill</button>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="panel" id="tab-contact">
+      <h2>Contact</h2>
+      <label>Email <input id="cEmail" type="email" placeholder="you@example.com"></label>
+      <label>GitHub link <input id="cGithub" placeholder="https://github.com/yourname"></label>
+      <label>Facebook link <input id="cFacebook" placeholder="https://facebook.com/yourname"></label>
+      <label>Instagram link <input id="cInstagram" placeholder="https://instagram.com/yourname"></label>
+      <label>Telegram link <input id="cTelegram" placeholder="https://t.me/yourname"></label>
+      <label>Another link (Behance, LinkedIn, TikTok…) <input id="cOther" placeholder="https://"></label>
+    </section>
+
+    <!-- BACKUP -->
+    <section class="panel" id="tab-backup">
+      <h2>Publish &amp; backup</h2>
+      <p class="hint">Visitors cannot see what you save here, because it is stored only in this browser. To publish your changes: (1) press Download content.json, (2) upload that file to your GitHub repository next to index.html, replacing the old one, (3) wait about 30 seconds while Vercel redeploys.</p>
+      <div class="row">
+        <button class="btn btn-small" id="exportBtn">Download content.json</button>
+        <label class="btn btn-ghost btn-small file-btn">Restore from file<input type="file" id="importFile" accept=".json" hidden></label>
+        <button class="btn btn-ghost btn-small danger" id="resetBtn">Reset everything</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
