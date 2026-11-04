@@ -30,7 +30,7 @@ async function persist(message = 'Saved') {
     $('status').classList.remove('dirty');
     toast(message);
   } else {
-    toast('Could not save. Check you are logged in and online.');
+    toast('Could not save: ' + (Store.lastError || 'unknown error'));
   }
 }
 
@@ -247,6 +247,14 @@ $('logoutBtn').onclick = async () => {
 
 // On page load: not set up -> setup message; logged in -> dashboard; else login form
 (async function start() {
-  if (!Store.ready) { $('setup').hidden = false; return; }
+  if (!Store.ready) {
+    // Tell the user exactly what is missing
+    const cfg = window.SUPABASE_CONFIG || {};
+    let why = 'The Supabase settings in supabase-config.js are missing or still contain PASTE_YOUR... placeholders.';
+    if (!window.supabase) why = 'The file supabase.js did not load. Make sure supabase.js is uploaded to GitHub next to admin.html.';
+    else if (cfg.url && cfg.anonKey && !String(cfg.url).includes('PASTE')) why = 'Unknown problem.';
+    $('setup').querySelector('p').textContent = why;
+    $('setup').hidden = false; return;
+  }
   (await Store.auth.session()) ? openDashboard() : ($('login').hidden = false);
 })();
