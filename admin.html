@@ -11,25 +11,45 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="admin" class="admin">
-
+ 
+  <!-- Shown when Supabase is not set up yet -->
+  <div class="login" id="setup" hidden>
+    <div class="box"><h1>Almost there</h1>
+      <p class="hint">Open <b>supabase-config.js</b> and paste your Supabase Project URL and anon key, then upload it and refresh this page.</p></div>
+  </div>
+ 
+  <!-- Login screen: only you can get past this -->
+  <div class="login" id="login" hidden>
+    <form class="box" id="loginForm">
+      <h1>Dashboard login</h1>
+      <label>Email <input id="lEmail" type="email" autocomplete="username" required></label>
+      <label>Password <input id="lPass" type="password" autocomplete="current-password" required></label>
+      <p class="login-error" id="loginError" role="alert"></p>
+      <button class="btn" type="submit">Log in</button>
+    </form>
+  </div>
+ 
+  <!-- The dashboard itself (hidden until you log in) -->
+  <div id="app" hidden>
   <header class="admin-bar">
     <strong>Dashboard</strong>
     <span id="status" class="status">All changes saved</span>
     <div class="admin-bar-actions">
       <a href="index.html" class="btn btn-ghost btn-small">View site</a>
+      <button class="btn btn-ghost btn-small" id="logoutBtn">Log out</button>
       <button class="btn btn-small" id="saveBtn">Save changes</button>
     </div>
   </header>
-
+ 
   <div class="admin-wrap">
     <div class="tabs" role="tablist">
       <button class="tab active" data-tab="profile">Profile</button>
       <button class="tab" data-tab="projects">Projects</button>
       <button class="tab" data-tab="skills">Skills</button>
       <button class="tab" data-tab="contact">Contact</button>
-      <button class="tab" data-tab="backup">Publish</button>
+      <button class="tab" data-tab="backup">Backup</button>
     </div>
-
+ 
     <!-- PROFILE -->
     <section class="panel active" id="tab-profile">
       <h2>Profile</h2>
@@ -49,7 +69,7 @@
         </div>
       </div>
     </section>
-
+ 
     <!-- PROJECTS -->
     <section class="panel" id="tab-projects">
       <h2>Projects</h2>
@@ -75,7 +95,7 @@
         </form>
       </div>
     </section>
-
+ 
     <!-- SKILLS -->
     <section class="panel" id="tab-skills">
       <h2>Skills</h2>
@@ -83,7 +103,7 @@
       <div id="skillRows"></div>
       <button class="btn btn-small" id="addSkill">+ Add skill</button>
     </section>
-
+ 
     <!-- CONTACT -->
     <section class="panel" id="tab-contact">
       <h2>Contact</h2>
@@ -94,20 +114,24 @@
       <label>Telegram link <input id="cTelegram" placeholder="https://t.me/yourname"></label>
       <label>Another link (Behance, LinkedIn, TikTok…) <input id="cOther" placeholder="https://"></label>
     </section>
-
+ 
     <!-- BACKUP -->
     <section class="panel" id="tab-backup">
-      <h2>Publish &amp; backup</h2>
-      <p class="hint">Visitors cannot see what you save here, because it is stored only in this browser. To publish your changes: (1) press Download content.json, (2) upload that file to your GitHub repository next to index.html, replacing the old one, (3) wait about 30 seconds while Vercel redeploys.</p>
+      <h2>Backup</h2>
+      <p class="hint">Your content is saved online and goes live the moment you press Save changes. Download a backup file now and then, just in case.</p>
       <div class="row">
-        <button class="btn btn-small" id="exportBtn">Download content.json</button>
+        <button class="btn btn-small" id="exportBtn">Download backup</button>
         <label class="btn btn-ghost btn-small file-btn">Restore from file<input type="file" id="importFile" accept=".json" hidden></label>
         <button class="btn btn-ghost btn-small danger" id="resetBtn">Reset everything</button>
       </div>
     </section>
   </div>
-
+ 
+  </div><!-- /#app -->
+ 
   <div class="toast" id="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
   <script src="script.js"></script>
   <script src="admin.js"></script>
 </body>
